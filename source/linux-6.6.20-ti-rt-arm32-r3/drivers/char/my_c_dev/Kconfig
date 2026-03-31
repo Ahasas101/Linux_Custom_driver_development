@@ -1,0 +1,5 @@
+menu "ahasas custom modules"
+config CUSTOM_HELLOWORLD
+	tristate "helloworld module support"
+	default n
+endmenu

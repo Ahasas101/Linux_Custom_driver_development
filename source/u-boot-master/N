@@ -1,0 +1,5 @@
+label: dos
+label-id: 0x16da59da
+device: /dev/sdc
+unit: sectors
+sector-size: 512

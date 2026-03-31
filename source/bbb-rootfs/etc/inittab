@@ -1,0 +1,1 @@
+ttyO0::respawn:/sbin/getty -L ttyO0 115200 vt100

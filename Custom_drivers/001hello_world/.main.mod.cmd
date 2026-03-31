@@ -1,0 +1,1 @@
+savedcmd_/home/ahasas/LDD1_Workspace/Custom_drivers/001hello_world/main.mod := printf '%s\n'   main.o | awk '!x[$$0]++ { print("/home/ahasas/LDD1_Workspace/Custom_drivers/001hello_world/"$$0) }' > /home/ahasas/LDD1_Workspace/Custom_drivers/001hello_world/main.mod
