@@ -54,9 +54,30 @@ ssize_t pcd_read (struct file *filp, char __user *buff, size_t count, loff_t *f_
 	
 }
 ssize_t pcd_write (struct file *filp, const char __user *buff, size_t count, loff_t *f_pos)
-{
+{	
+	struct pcdev_private_data *pcdev_data= (struct pcdev_private_data*)filp->private_data;
+	int size = pcdev_data->pdata.size;
+	pr_info("Write requested for %zu bytes\n",count);
+	pr_info("current file position = %lld\n", *f_pos);
+	if(count + *f_pos > size)
+	{
+		count = size - *f_pos;
+	}
+	if(!count) {
+		pr_err("No space left on the device\n");
+		return -ENOMEM;
+	}
+	if(copy_from_user(pcdev_data->buffer+(*f_pos), buff, count))
+	{
+		return -EFAULT;
+	}
+		*f_pos += count;
 	
-	return -ENOMEM;
+	pr_info("Number of bytes successfully written = %zu\n",count);
+	pr_info("Update file position = %lld\n",*f_pos);
+	pr_info("write requested for %zu bytes\n",count);
+	
+	return count;
 	
 }
 
@@ -75,9 +96,19 @@ int check_permission(int dev_perm, int acc_mode)
 	return -EPERM;
 }
 
+
 int pcd_open (struct inode *inode, struct file *filp)
-{
-	return 0;
+{	int ret;
+	int minor_n;
+	minor_n = MINOR(inode->i_rdev);
+	pr_info("Device Minor no. = %d", minor_n);
+	
+	struct pcdev_private_data *pcdev_data;
+	pcdev_data = container_of(inode->i_cdev, struct pcdev_private_data, cdev);
+	filp->private_data = pcdev_data;
+	ret = check_permission(pcdev_data->pdata.perm , filp->f_mode);
+	(!ret)?pr_info("open was successful\n") : pr_info("open was unsuccessful\n");
+	return ret;
 }
 
 int pcd_release (struct inode *inode, struct file *filp)
@@ -194,6 +225,7 @@ out:
 void pcd_platform_driver_remove(struct platform_device *pdev)
 {
 	struct pcdev_private_data *dev_data = dev_get_drvdata(&pdev->dev);
+	//alternatively: struct pcdev_private_data *dev_data = pdev->dev.driver;
 	
 	/*1 Remove a devie that was created with device_create()*/
 	device_destroy(pcdrv_data.class_pcd,dev_data->dev_num);
