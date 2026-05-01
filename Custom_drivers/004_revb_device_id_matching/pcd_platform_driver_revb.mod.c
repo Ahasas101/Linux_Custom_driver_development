@@ -40,6 +40,7 @@ __used __section("__versions") = {
 	{ 0xd5f66efd, "cdev_init" },
 	{ 0x8ea73856, "cdev_add" },
 	{ 0xe486c4b7, "device_create" },
+	{ 0x90a48d82, "__ubsan_handle_out_of_bounds" },
 	{ 0xd272d446, "__fentry__" },
 	{ 0xbebe66ff, "module_layout" },
 };
@@ -68,6 +69,7 @@ __used __section("__version_ext_crcs") = {
 	0xd5f66efd,
 	0x8ea73856,
 	0xe486c4b7,
+	0x90a48d82,
 	0xd272d446,
 	0xbebe66ff,
 };
@@ -95,6 +97,7 @@ __used __section("__version_ext_names") =
 	"cdev_init\0"
 	"cdev_add\0"
 	"device_create\0"
+	"__ubsan_handle_out_of_bounds\0"
 	"__fentry__\0"
 	"module_layout\0"
 ;
@@ -102,4 +105,4 @@ __used __section("__version_ext_names") =
 MODULE_INFO(depends, "");
 
 
-MODULE_INFO(srcversion, "7090E3303916C0FB17A3654");
+MODULE_INFO(srcversion, "700AAF12D5B59505B86EA5D");

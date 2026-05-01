@@ -1,0 +1,1 @@
+savedcmd_pcd_platform_driver_revb.ko := ld -r -m elf_x86_64 -z noexecstack --no-warn-rwx-segments --build-id=sha1  -T /usr/src/linux-headers-6.17.0-19-generic/scripts/module.lds -o pcd_platform_driver_revb.ko pcd_platform_driver_revb.o pcd_platform_driver_revb.mod.o .module-common.o
