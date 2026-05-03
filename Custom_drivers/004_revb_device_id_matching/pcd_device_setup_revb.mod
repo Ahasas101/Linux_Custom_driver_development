@@ -1,1 +1,1 @@
-./pcd_device_setup_revb.o
+/home/ahasas/LDD1_Workspace/Custom_drivers/004_revb_device_id_matching/pcd_device_setup_revb.o

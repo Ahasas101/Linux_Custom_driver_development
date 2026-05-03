@@ -1,1 +1,1 @@
-./pcd_platform_driver_revb.o
+/home/ahasas/LDD1_Workspace/Custom_drivers/004_revb_device_id_matching/pcd_platform_driver_revb.o

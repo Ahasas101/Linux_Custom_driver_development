@@ -1,4 +1,4 @@
-obj-m := pcd_device_setup_revb.o pcd_platform_driver_revb.o
+obj-m := pcd_platform_driver_dt.o
 ARCH=arm
 CROSS_COMPILE=arm-linux-gnueabihf-
 KERNEL_DIR=/home/ahasas/LDD1_Workspace/source/linux-6.6.20-ti-rt-arm32-r3
@@ -15,8 +15,11 @@ help:
 
 host:
 	make -C $(HOST_KERNEL_DIR) M=$(PWD) modules
+	
+copy-dtb:
+	scp /home/ahasas/LDD1_Workspace/source/linux-6.6.20-ti-rt-arm32-r3/arch/arm/boot/dts/ti/omap/am335x-boneblack.dtb root@192.168.7.2:/home/debian/drivers
 
 copy-drv:
-	scp pcd_device_setup_revb.ko root@192.168.7.2:/home/debian/drivers
+	scp *.ko root@192.168.7.2:/home/debian/drivers
 
 
